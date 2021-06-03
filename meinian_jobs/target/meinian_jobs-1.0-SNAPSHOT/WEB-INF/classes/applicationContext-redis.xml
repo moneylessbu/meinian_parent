@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/mvc
+                         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                    http://code.alibabatech.com/schema/dubbo
+                         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                    http://www.springframework.org/schema/context
+                         http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置数据库连接池-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大连接数-->
+        <property name="maxTotal" value="100"></property>
+        <!--最大闲置数-->
+        <property name="maxIdle" value="50"></property>
+        <!--允许从数据库连接池借对象-->
+        <property name="testOnReturn" value="true"></property>
+        <!--允许归还-->
+        <property name="testOnBorrow" value="true"></property>
+    </bean>
+
+    <!--配置redis-->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+        <!--配置redis的主机-->
+        <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+        <!--配置redis端口号-->
+        <constructor-arg name="port" value="6379" type="int"></constructor-arg>
+        <!--配置连接超时时间-->
+        <constructor-arg name="timeout" value="30000" type="int" />
+    </bean>
+
+
+</beans>

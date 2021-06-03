@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 创建正则表达式对象
+    // 校验手机号码
+    var reg =  new RegExp("^1[3-9]\\d{9}$");
+    var tel = "1333333333";
+    var result = reg.test(tel);
+    console.log(result)
+</script>
+</html>
